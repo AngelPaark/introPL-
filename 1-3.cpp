@@ -4,13 +4,14 @@ using namespace std;
 
 /**
 * \brief Математическая функция, рассчитывающая количество теплоты q
+* \param HEAT_CAPACITY-теплоемкость стали
 * \param const m-масса детали
-* \param const t0-начальная температура
-* \param const t-конечная температура
+* \param const tStart-начальная температура
+* \param const tFinish -конечная температура
 * \return возвращает значение q
 **/
 
-double getQ(const double m, const double t0, const double t, const double c);
+double getQ(const double m, const double tStart, const double tFinish, const double HEAT_CAPACITY);
 
 /**
 * \brief точка входа в программу
@@ -22,24 +23,25 @@ int main()
 
 {
 	setlocale(LC_ALL, "Russian");
-	const double c = 500;
+	const double HEAT_CAPACITY = 500;
 	cout << "введите массу детали: \n";
 	double m;
 	cin >> m;
 
 	cout << "введите начальную температуру: \n";
-	double t0;
-	cin >> t0;
+	double tStart;
+	cin >> tStart;
 
 	cout << "введите конечную температуру: \n";
-	double t;
-	cin >> t;
+	double tFinish;
+	cin >> tFinish;
 
-	const auto q = getQ(m, t0, t,c);
+	const auto q = getQ(m, tStart, tFinish, HEAT_CAPACITY);
 	cout << "q=" << q;
 }
 
-double getQ(const double m, const double t0, const double t, const double c)
+double getQ(const double m, const double tStart, const double tFinish, const double HEAT_CAPACITY)
 {
-	return c * m * (t - t0);
+	return HEAT_CAPACITY * m * (tFinish - tStart);
 }
+	
