@@ -22,10 +22,27 @@ double getNegativeNumbers(const double a, const double b, const double c);
 **/
 double getSum(const double a, const double b, const double c);
 
+
+
+enum class Numbers
+{
+	/**
+	* \brief Находит абсолютное значение суммы чисел
+	*/
+	summ,
+
+	/**
+	* \brief Находит количество отрицательных чисел
+	*/
+	negative
+
+};
+
 /**
 * \brief Точка входа в программу
 * \return Возвращает 0 в случае успешного выполнения
 **/
+
 
 int main()
 
@@ -44,15 +61,36 @@ int main()
 	double c;
 	cin >> c;
 
-	
-	
-	const auto NegativeNumbers = getNegativeNumbers(a, b, c);
-	cout << "NegativeNumbers=" << NegativeNumbers <<"\n";
+	cout << "выберите,что посчитать:"
 
-	const auto sum = getSum(a, b, c);
-	cout << "sum=" << sum;
 
+		<<"\n сумма \n" << (static_cast<int>(Numbers::summ))
+		<<"\n количество отрицательных чисел \n"<< (static_cast<int>(Numbers::negative))
+		<< "\n ";
+	int action;
+	cin >> action;
+
+	const auto numbers = static_cast<Numbers>(action);
+	switch (numbers)
+	{
+	case Numbers::summ:
+	{
+		const auto sum = getSum(a, b, c);
+		std::cout << "сумма равна \n" << sum;
+		break;
+	}
+	case Numbers::negative:
+		const auto NegativeNumbers = getNegativeNumbers(a, b, c);
+		std::cout <<"количество отрицательных чисел равно \n "<< NegativeNumbers;
+		break;
+	
+	}
+
+	return 0;
 }
+
+
+
 
 
 double getNegativeNumbers(const double a, const double b, const double c)
