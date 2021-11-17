@@ -2,33 +2,25 @@
 #include <cmath>
 #include <iostream>
 using namespace std;
-/**
-* \brief Функция, определяющая можно ли разместить 2 дома на участке
-* \param const x-степень
-* \param const a-длина участка
-* \param const b-ширина участка
-**/
-
-double getPlotOfLand(const double x, const double a, const double b);
 
 /**
-* param const x-степень
-* \param const p-длина 1 дома
-* \param const q-ширина 1 дома
-**/
-
-double getHouse1(const double x, const double p, const double q);
+* \brief программа определяет, можно ли разместить 2 дома на 1 участке
+* \param const widthLand-ширина участка
+* \param const lendthLand-длина участка
+*/
+/**
+* \brief функция находит максимальную ширину 2 домов
+* \param const width1-ширина 1 дома
+* \param const width2-ширина 2 дома
+*/
+double maxwidth(double width1, double width2);
 
 /**
-* param const x-степень
-* \param const r-длина 2 дома
-* \param const s-ширина 2 дома
-**/
-
-double getHouse2(const double x, const double r, const double s);
-
-
-
+* \brief функция находит максимальную длину 2 домов
+* \param const length1-длина 1 дома
+* \param const length2-длина 2 дома
+*/
+double maxlength(double length1, double length2);
 
 
 /**
@@ -38,56 +30,49 @@ double getHouse2(const double x, const double r, const double s);
 int main()
 {
 	setlocale(LC_ALL, "Russian");
+	cout << "введите длину и ширину 1 дома:";
+	double length1;
+	double width1;
+	cin >> length1;
+	cin >> width1;
 
-	cout << "введите степень: \n ";
-	double x;
-	cin >> x;
+	cout << "введите длину и ширину 2 дома:";
+	double length2;
+	double width2;
+	cin >> length2;
+	cin >> width2;
 
-	cout << "введите длину участка: \n ";
-	double a;
-	cin >> a;
+	cout << "введите длину и ширину участка:";
+	double lengthLand;
+	double widthLand;
+	cin >> lengthLand;
+	cin >> widthLand;
 
-	cout << "введите ширину участка: \n ";
-	double b;
-	cin >> b;
-
-	cout << "введите длину 1 дома: \n ";
-	double p;
-	cin >> p;
-
-	cout << "введите ширину 1 дома: \n ";
-	double q;
-	cin >> q;
-
-	cout << "введите длину 2 дома: \n ";
-	double r;
-	cin >> r;
-
-	cout << "введите ширину 2 дома: \n ";
-	double s;
-	cin >> s;
-
-	if (getHouse1(x, p, q) + getHouse2(x, r, s) <= getPlotOfLand(x, a, b))
+	if (((width1 + width2 <= widthLand) and (maxlength(length1,length2) <= lengthLand)) or ((maxwidth(width1,width2) <= widthLand) and (length1 + length2 <= lengthLand)))
 	{
 		cout << "можно";
-	}
-	else
-	{
+
+    }
+
+	else {
 		cout << "нельзя";
 	}
+
+
+
+}
+double maxwidth(double width1,double width2)
+{
+	if (width1 > width2)
+		return width1;
+	else
+		return width2;
 }
 
-double getHouse1(const double x, const double p, const double q)
+double maxlength(double length1, double length2)
 {
-	return (pow(p, x) * q);
-}
-
-double getHouse2(const double x, const double r, const double s)
-{
-	return(pow(r, x) * s);
-}
-
-double getPlotOfLand(const double x, const double a, const double b)
-{
-	return(pow(a, x) * b);
+	if (length1 > length2)
+		return length1;
+	else
+		return length2;
 }
