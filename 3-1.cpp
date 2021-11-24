@@ -48,5 +48,5 @@ double myFunc(const double x)
 
 bool isCalculated(const double x)
 {
-	return x >= 0;
+	return ((x < 2) & (cos(x) < 0 || cos(x) > 0));
 }
