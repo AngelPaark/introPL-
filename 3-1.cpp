@@ -48,5 +48,5 @@ double myFunc(const double x)
 
 bool isCalculated(const double x)
 {
-	return ((x < 2) & (cos(x) < 0 || cos(x) > 0));
+	return ((x<=1) && (abs(cos(x)) >= std::numeric_limits<double>::min()));
 }
