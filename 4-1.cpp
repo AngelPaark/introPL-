@@ -1,7 +1,6 @@
 #include <iostream>
 #include <sstream>
 #include <random>
-#include<cmath>
 
 using namespace std;
 
@@ -36,7 +35,7 @@ int* getArray(const size_t size, const int selection, const int min_value, const
  * \param message Мотивоционное сообщение для пользователя
  * \return Размер массива
  */
-size_t GetSize(const string& message);
+size_t getSize(const string& message);
 
 /**
  * \brief Вывод элементов массива
@@ -50,7 +49,7 @@ string toString(const int*, const size_t size);
  * \param size Размер массива
  * \return Массив с заменой
  */
-void Replace(int*, const size_t size);
+void replace(int*, const size_t size);
 
 /**
  * \brief Функция для нахождения элементов, значения которых положительны и по модулю не превосходят заданное число А
@@ -83,7 +82,7 @@ int main()
     const int max_value = 10;
     try
     {
-        const auto size = GetSize("Введите размер массива: ");
+        const auto size = getSize("Введите размер массива: ");
         cout << "Выберите способ создания массива: " << static_cast<int>(Choice::Manually) << " - вручную, " << static_cast<int>(Choice::Randomly) << " - заполнить случайными числами ";
         int input_type;
         cin >> input_type;
@@ -92,7 +91,7 @@ int main()
         cout << toString(my_array, size);
 
         cout << "\nМассив после замены второго элемента массива на максимальный среди отрицательных:\n";
-        Replace(my_array, size);
+        replace(my_array, size);
         cout << toString(my_array, size);
         int A;
         cout << "Введите число A: ";
@@ -119,7 +118,7 @@ int main()
     return error_code;
 }
 
-size_t GetSize(const string& message)
+size_t getSize(const string& message)
 {
     int size = -1;
     cout << message;
@@ -157,6 +156,8 @@ int* getArray(const size_t size, const int selection, const int min_value, const
             array[index] = uniformIntDistribution(gen);
             break;
         }
+        default:
+            cout << "Ошибка!";
         }
     }
 
@@ -178,12 +179,12 @@ string toString(const int* array, const size_t size)
     return buffer.str();
 }
 
-void Replace(int* array, const size_t size) {
-    int Value = 0;
+void replace(int* array, const size_t size) {
+    int value = 0;
     for (size_t i = 0; i < size; i++) {
-        if (array[i] < Value) {
-            Value = array[i];
-            array[1] = Value;
+        if (array[i] < value) {
+            value = array[i];
+            array[1] = value;
         }
     }
 }
@@ -199,13 +200,16 @@ void Replace(int* array, const size_t size) {
 }
 
     void getNumber(int* array, const size_t size, const int B) {
-    for (size_t i = 0; i < size; i++) {
-        if ((array[i]) + array[i+1]<B) {
-            cout << i+1 << endl;
-            break;
+        size_t i = 0;
+        int finish = 0;
+        while (array[i] + array[i + 1] < B && i < size - 1) {
+            finish = i;
+            i++;
 
-       
         }
-    }
-   
-    }
+        if (i < size - 1 && i != 0) {
+            finish++;
+            cout << finish << endl;
+        }
+      
+     }
